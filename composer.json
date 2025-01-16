@@ -1,11 +1,10 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
     "name": "rfc/scannable",
-    "description": "Implement a scanner that can scan by namespace or path, etc.",
+    "description": "Note that this is not a scanner of its own. It is merely an interface that describes a scanner.",
     "keywords": [
-        "Scan",
-        "Scanner",
-        "Scannable"
+        "scanner",
+        "interface"
     ],
     "type": "library",
     "license": "MIT",
@@ -17,10 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "illuminate/collections": ">=8.0.0",
-        "illuminate/support": ">=8.0.0",
-        "reflective/reflection": "^1.0"
+        "php": "*"
     },
     "autoload": {
         "psr-4": {
