@@ -26,6 +26,12 @@ class Scan implements Scannable
         $this->setReflectionClass($reflectionClass);
     }
 
+    /**
+     * @param string|null $name
+     * @param int $flags
+     * @return array
+     * @return array<string,array<string,ReflectionClass>>
+     */
     public function getParentsClass(?string $name = null, int $flags = 0): array
     {
         return array_map(function (ReflectionClass $class) use ($name, $flags) {
@@ -33,14 +39,22 @@ class Scan implements Scannable
         }, $this->getReflectionClass());
     }
 
-    public function getAttributes(?string $name = null, int $flags = 0): array
+    /**
+     * @param string|null $name
+     * @param int $flags
+     * @return array<string,array<string,ReflectionClass>>
+     */
+    public function getAttributesClass(?string $name = null, int $flags = 0): array
     {
         return array_map(function (ReflectionClass $class) use ($name, $flags) {
             return $class->getAttributes($name, $flags);
         }, $this->getReflectionClass());
     }
 
-    public function getInterfaces(): array
+    /**
+     * @return array<string,array<string,ReflectionClass>>
+     */
+    public function getInterfacesClass(): array
     {
         return array_map(function (ReflectionClass $class) {
             return $class->getInterfaces();
@@ -76,7 +90,7 @@ class Scan implements Scannable
     public function getClassLoader(): ClassLoader
     {
         foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $registeredLoader) {
-            if (str_starts_with($vendorDir, base_path())) {
+            if (str_starts_with(__DIR__, $vendorDir)) {
                 return $this->classLoader = $registeredLoader;
             }
         }
